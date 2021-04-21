@@ -15,7 +15,7 @@ public class Lesson2 {
                 int bin = Integer.parseInt(binary);
                 isBinary = true;
             } catch (Exception e) {
-                System.out.println("Не верный формат введенных данных");
+                System.out.println("Неверный формат введенных данных");
             }
 
 
@@ -48,7 +48,7 @@ public class Lesson2 {
                 int bin = Integer.parseInt(number);
                 isDec = true;
             } catch (Exception e) {
-                System.out.println("Не верный формат введенных данных");
+                System.out.println("Неверный формат введенных данных");
             }
             if (isDec) {
                 StringBuilder sb = new StringBuilder();
