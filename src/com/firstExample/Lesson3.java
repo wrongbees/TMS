@@ -441,26 +441,26 @@ public class Lesson3 {
             System.out.println(" Сумма четных элементов стоящих над побочной диагональю (не включительно) ровна "
                 + evenSum);
             System.out.println("**********************************************");
-
+//**********************************************************************************************
             //транспонируем матрицу
-            int[][] newArray = new int[array.length][array.length]; // создаем новый массив
-            for (int j = 0; j < array.length; j++) {
-                for (int i = 0; i < array.length; i++) {
 
-                    newArray[i][j] = array[j][i]; // заколбашиваем хитрую шляпу
+            int box = 0;
+            for (int j = 0; j < array.length-1; j++) {     //j - индекс строки
+                for (int i = j; i < array.length-1; i++) { // i-индекс столбца
+
+                   box = array[i+1][j];
+                   array[i+1][j] = array[j][i+1];
+                   array[j][i+1] = box;
 
                 }
             }
-            array = newArray;// меняем ссылку первого массива на второй
+            for (int j = 0; j < array.length; j++) {
+                for (int i = 0; i < array.length; i++) {
 
-            // выводим на консоль
-            for (int j = 0; j < array.length; j++) {     //j - индекс строки
-                for (int i = 0; i < array.length; i++) { // i-индекс столбца
-
-                    System.out.print(array[j][i] + " "); //выводим строку внутренним циклом
+                    System.out.print(array[j][i]+" ");
 
                 }
-                System.out.println();// переводим курсор для следующей строки
+                System.out.println();
             }
 
         }else {
