@@ -71,12 +71,15 @@ public class Computer {
 
     public void turningOn() throws InterruptedException {
         if (isWork | !isLive){return;}
+
+        System.out.println("*************Начинается процесс включения*********************");
         if (resource == 0){
-            printMessage("В связи с завершением ресурса сгорает");
+            printMessage("в связи с завершением ресурса сгорает");
+            isLive = false;
             return;
         }
 
-        System.out.println("*************Начинается процесс включения*********************");
+
         String message =(generateСrash())? request():"включается без проблем";
 
         Thread.sleep(3000);
