@@ -2,6 +2,7 @@ package com.firstExample;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Lesson2 {
 
@@ -100,9 +101,7 @@ public class Lesson2 {
             System.out.println("Введите число");
 
             String numberStr = reader.readLine();
-            // while ((numberStr = reader.readLine()).length() != 4){
-            //    System.out.println("Мы просили значное");
-            // }
+
             int number = Integer.parseInt(numberStr);
             String isEven = (number % 2 == 0) ? "четное" : "не четное";
             String lastIs7 = (number % 10 == 7) ? "семь" : "не семь";
@@ -190,38 +189,62 @@ public class Lesson2 {
             System.out.print("Первое число :");
             int second = Integer.parseInt(reader.readLine());
 
-            System.out.println("Наибольшее число "+((first > second) ? first : second));
+            System.out.println("Наибольшее число " + ((first > second) ? first : second));
 
         } catch (Exception e) {
             System.out.println("Не верный формат введенных данных");
         }
     }
 
-    public static void task7() throws Exception {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Введем колличество програмистов");
+    // public static void task7() throws Exception {
+     //  try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+    //      System.out.println("Введем колличество програмистов");
 
-            int quantity = Integer.parseInt(reader.readLine());
+   //           int quantity = Integer.parseInt(reader.readLine());
 
-            String correctSuffix = " программист"; // 1 программист
-            if (quantity >= 0 ){
+  //          String correctSuffix = " программист"; // 1 программист
+ //         if (quantity >= 0 ){
 
-                if (quantity == 0 || quantity >= 5) {
-                    correctSuffix = " программистов";
-                }else {
-                    if( (2 <= quantity)& (quantity <= 4))
-                    correctSuffix = " программиста";
-                }
-                System.out.println(quantity+correctSuffix);
-            }else {
-                System.out.println("Неа, слишком мало программистOFF");
+  //          if (quantity == 0 || quantity >= 5) {
+  //            correctSuffix = " программистов";
+   //     }else {
+   //         if( (2 <= quantity)& (quantity <= 4))
+  //          correctSuffix = " программиста";
+  //      }
+ //       System.out.println(quantity+correctSuffix);
+   //    }else {
+  //         System.out.println("Неа, слишком мало программистOFF");
+ //      }
+
+
+ //       } catch (Exception e) {
+ //           System.out.println("Не верный формат введенных данных");
+  //       }/  }
+
+    public static void task7() {
+      //  Scanner scan = new Scanner(System.in);
+       // System.out.println("Введите количество программистов ");
+      //  String Str = scan.nextLine();
+      //  int n = Integer.parseInt(Str);
+        for (int n = 0; n < 41; n++){
+        if (n >= 0) {
+
+            if ( n % 10 == 1 & n % 100 != 11) {
+                System.out.println(n + " программист");
+            } else if ( n % 100 == 11) {
+                System.out.println(n + " программистов");
+            } else if ( n % 100 == 12 || n % 100 == 13 || n % 100 == 14) {
+                System.out.println(n + " программистов");
+            } else if ( n % 10 == 2 || n % 10 == 3 || n % 10 == 4) {
+                System.out.println(n + " программиста");
+            } else {
+                System.out.println(n + " программистов");
             }
 
-
-        } catch (Exception e) {
-            System.out.println("Не верный формат введенных данных");
+        } else {
+            System.out.println("Количество программистов не может быть отрицательным");
         }
     }
-
-
+    }
 }
+

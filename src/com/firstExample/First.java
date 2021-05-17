@@ -1,12 +1,13 @@
 package com.firstExample;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Arrays;
+
 public class First {
-    public static void main(String[] args) {
-        String greeting = "Hello world";
-        System.out.println(greeting);
-        World world = new World();
-        System.out.println(world.getWorldGreeting());
+    public static void main(String[] args) throws Exception{
+
+        Computer computer = new Computer();
+        computer.presentation();
     }
 }
-
-
