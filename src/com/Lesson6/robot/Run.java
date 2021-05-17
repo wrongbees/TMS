@@ -1,4 +1,4 @@
-package by.teachmeskills.robot;
+package  com.Lesson6.robot;
 
 public class Run {
     public static void main(String[] args) {
