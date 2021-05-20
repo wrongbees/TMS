@@ -1,6 +1,6 @@
-package com.Lesson7;
+package com.Lesson7.task1_2;
 
-import com.Lesson7.task1.StringRestructur;
+
 
 import java.io.IOException;
 

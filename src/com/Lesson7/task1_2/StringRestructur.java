@@ -1,4 +1,4 @@
-package com.Lesson7.task1;
+package com.Lesson7.task1_2;
 
 
 import java.io.BufferedReader;
