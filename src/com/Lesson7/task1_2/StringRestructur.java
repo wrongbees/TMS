@@ -36,7 +36,7 @@ public class StringRestructur {
     // непосредственно сам метод который нужно создать для task1
     private static void cutter(String text, String first, String second) {
 
-        System.out.println(text.substring(text.indexOf(first), text.indexOf(second)));
+        System.out.println(new StringBuilder(text).delete(text.indexOf(first), text.indexOf(second)));
 
     }
 
