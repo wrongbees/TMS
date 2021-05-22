@@ -26,14 +26,15 @@ public class ForFileReader {
 
     private static void task4() {
         try (FileReader reader = new FileReader("e:/test/source.txt");
-             FileWriter writer = new FileWriter("e:/test/result.txt",false)) {
+             FileWriter writer = new FileWriter("e:/test/result.txt")) {
 
             int oneByte;
             while (reader.ready()) {
                 StringBuilder sb = new StringBuilder();
                 while ((oneByte = reader.read()) != 46 & oneByte != -1 & oneByte != 63 & oneByte != 33) {
 
-                    sb.append((char)oneByte);
+                    if (oneByte != 10 & oneByte != 13 )//не будем аппендить возврат корретки
+                    sb.append((char)oneByte);          // и перевод строки
 
                 }
 
@@ -43,6 +44,7 @@ public class ForFileReader {
                 if (TextFormater.searchPalindrome(stringArray) |
                         ( worldCount >= 3 & worldCount < 5)){
                 writer.write(sb.toString());
+                    System.out.println(sb.toString());
                 writer.write(10);
                 }
 
