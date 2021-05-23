@@ -10,7 +10,7 @@ public class Censorship {
     private static String[] blackWords;
 
     public static void blackListFileSearcher(String file, String blackList) throws FileNotFoundException {
-        String message = "Текст прошел проверку на цензуру";
+
 
         try (FileReader readerFile = new FileReader(file);
              BufferedReader blReader = new BufferedReader(new FileReader(blackList))) {
@@ -35,40 +35,56 @@ public class Censorship {
 
 
             int oneByte;
+            int countOffer = 0;
             while (readerFile.ready()) {
-                StringBuilder oneWord = new StringBuilder();
+                StringBuilder oneOffer = new StringBuilder();
                 /*
                 читаем слово пока не упремся в пробел
                  */
-                while ((oneByte = readerFile.read()) != 32 &
-                        oneByte != 46 & oneByte != 44 & readerFile.ready()) {
+                while ((oneByte = readerFile.read()) != 46 & oneByte != -1 & oneByte != 63 & oneByte != 33) {
 
-                    if (oneByte != 10)//не будем аппендить возврат корретки
-                        oneWord.append((char) oneByte);          // и перевод строки
+                    if (oneByte != 10 & oneByte != 13 )//не будем аппендить возврат корретки
+                        oneOffer.append((char) oneByte);          // и перевод строки
                 }
 
-                String wordForCheck = oneWord.toString().replaceAll("\\s*(\\s|,|!|\\.|-|\\?|\\(|\\)|;|:)\\s*","");
-                if (Censorship.censorshipСheck(wordForCheck)){ // вызываем метод проверки с черным списком
-                    message = "Текст не прошел проверку на цензуру";
+                String offerForCheck = oneOffer.toString().replaceAll(",|!|\\.|-|\\?|\\(|\\)|;|:", "");
+                if (Censorship.checkTheOffer(offerForCheck.split(" "))) {
+                    System.out.println("Обнаружено не допустимое слово в предложении:");
+                    System.out.println(oneOffer.toString());
+                    countOffer++;
                 }
 
             }
-
+            if (countOffer == 0) {
+                System.out.println("Текст прошел проверку на цензуру");
+            } else {
+                System.out.println("Обнаружено "+countOffer+" предложений подлежащих исправлению.");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(message);
+
     }
 
-    private static boolean censorshipСheck(String wordForCheck){
+    private static boolean censorshipСheck(String wordForCheck) {
         for (String blackWord : blackWords)
-            if(wordForCheck.toLowerCase().equals(blackWord.toLowerCase())){
-                System.out.println(wordForCheck);
+            if (wordForCheck.toLowerCase().equals(blackWord.toLowerCase())) {
                 return true;
             }
         return false;
 
+    }
+
+    private static boolean checkTheOffer(String[] words) {
+        boolean result = false;
+        for (String word : words) {
+            if (censorshipСheck(word)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
