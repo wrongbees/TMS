@@ -1,12 +1,16 @@
 package com.Lesson8;
 
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.control.TreeSortMode;
+
 import java.util.*;
 
 
 public class Shop {
 
-    private List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<Product>();
 
     public void addProduct(Product product) {
 
@@ -28,14 +32,14 @@ public class Shop {
 
     }
 
-    public List<String> getAllProduct() {
+    public Collection<Product> getAllProduct() {
         List<String> nameList = new ArrayList<>();
 
-        for (Product item : productList) {
-            nameList.add(item.getName());
-        }
+//        for (Product item : productList) {
+//            nameList.add(item.getName());
+//        }
 
-        return nameList;
+        return productList;
     }
 
     public void deleteProduct(int id) {
@@ -50,8 +54,9 @@ public class Shop {
 
         for (Product item : productList) {
 
-            if (item.getId() != id) {
+            if (item.getId() == id) {
                 found = true;
+                break;
             }
             index++;
         }
@@ -86,7 +91,34 @@ public class Shop {
         shop.addProduct(new Product(4, "Хлеб", 2));
         shop.addProduct(new Product(44, "Селедка", 5));
 
-        System.out.println(shop.getAllProduct().toString());
+         for (Product item : shop.getAllProduct()){
+            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
+            System.out.println();
+
+        }
+        System.out.println("********************************************");
+
+        PriceComparator prComp = new PriceComparator();
+
+        List<Product> priceList = new ArrayList<>();
+        priceList.addAll( shop.getAllProduct());
+        Collections.sort(priceList,prComp);
+
+        for (Product item : priceList){
+            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
+            System.out.println();
+        }
+        System.out.println("************************************");
+        /*
+        удаляем один продукт
+         */
+        shop.deleteProduct(44);
+
+        for (Product item : shop.getAllProduct()){
+            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
+            System.out.println();
+
 
     }
+}
 }
