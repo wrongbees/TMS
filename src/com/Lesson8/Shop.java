@@ -7,7 +7,7 @@ import java.util.*;
 public class Shop {
 
     private List<Product> productList = new ArrayList<Product>();
-
+    //метод добавления продукта
     public void addProduct(Product product) {
 
         if (productList.size() != 0) {
@@ -28,10 +28,12 @@ public class Shop {
 
     }
 
+    // метод возвращает список
     public List<Product> getAllProduct() {
         return productList;
     }
 
+    // метод удаляет продукт
     public void deleteProduct(int id) {
 
         if (productList.size() == 0) {
@@ -56,6 +58,7 @@ public class Shop {
         }
     }
 
+    // метод редактирует товар
     public void editProduct(Product product) {
 
         if (productList.size() == 0) {
