@@ -1,9 +1,6 @@
 package com.Lesson8;
 
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.control.TreeSortMode;
 
 import java.util.*;
 
@@ -32,14 +29,8 @@ public class Shop {
 
     }
 
-    public Collection<Product> getAllProduct() {
-        List<String> nameList = new ArrayList<>();
-
-//        for (Product item : productList) {
-//            nameList.add(item.getName());
-//        }
-
-        return productList;
+    public List<Product> getAllProduct() {
+          return productList;
     }
 
     public void deleteProduct(int id) {
@@ -113,12 +104,16 @@ public class Shop {
         удаляем один продукт
          */
         shop.deleteProduct(44);
+        List<Product> productList = shop.getAllProduct();
 
-        for (Product item : shop.getAllProduct()){
-            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
+       for (int i = productList.size()-1; i >=0 ; i--){
+
+            System.out.printf("%s    %s    %s", productList.get(i).getId(),
+                    productList.get(i).getName(),productList.get(i).getPrice());
             System.out.println();
+       }
 
 
     }
 }
-}
+
