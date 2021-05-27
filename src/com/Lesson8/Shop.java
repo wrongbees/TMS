@@ -1,7 +1,6 @@
 package com.Lesson8;
 
 
-
 import java.util.*;
 
 
@@ -30,7 +29,7 @@ public class Shop {
     }
 
     public List<Product> getAllProduct() {
-          return productList;
+        return productList;
     }
 
     public void deleteProduct(int id) {
@@ -64,56 +63,15 @@ public class Shop {
             return;
         }
 
-        for (Product item : productList) {
+        for (int i = 0; i < productList.size(); i++) {
 
-            if (item.getId() != product.getId()) {
-                item = product;
+            if (productList.get(i).getId() == product.getId()) {
+                productList.get(i).setName(product.getName());
+                productList.get(i).setPrice(product.getPrice());
             }
         }
     }
 
-    public static void main(String[] args) {
 
-        Shop shop = new Shop();
-
-        shop.addProduct(new Product(12, "Водка", 7));
-        shop.addProduct(new Product(12, "Водка Аквадив", 8));
-        shop.addProduct(new Product(3, "Сало", 10));
-        shop.addProduct(new Product(4, "Хлеб", 2));
-        shop.addProduct(new Product(44, "Селедка", 5));
-
-         for (Product item : shop.getAllProduct()){
-            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
-            System.out.println();
-
-        }
-        System.out.println("********************************************");
-
-        PriceComparator prComp = new PriceComparator();
-
-        List<Product> priceList = new ArrayList<>();
-        priceList.addAll( shop.getAllProduct());
-        Collections.sort(priceList,prComp);
-
-        for (Product item : priceList){
-            System.out.printf("%s    %s    %s",item.getId(),item.getName(),item.getPrice());
-            System.out.println();
-        }
-        System.out.println("************************************");
-        /*
-        удаляем один продукт
-         */
-        shop.deleteProduct(44);
-        List<Product> productList = shop.getAllProduct();
-
-       for (int i = productList.size()-1; i >=0 ; i--){
-
-            System.out.printf("%s    %s    %s", productList.get(i).getId(),
-                    productList.get(i).getName(),productList.get(i).getPrice());
-            System.out.println();
-       }
-
-
-    }
 }
 
