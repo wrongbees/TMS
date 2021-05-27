@@ -1,6 +1,7 @@
 package com.Lesson8;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Application {
     private static boolean alive = true;
 
     //метод вывод всех товаров
-    private static void displayOfAllProducts() {
+    private static void displayOfAllProducts() throws IOException {
         System.out.println("*********************************");
         System.out.println("Вывести товары по:\n" +
                 "     [1] по цене(возростание);\n" +
@@ -39,7 +40,7 @@ public class Application {
     }
 
     // добавление продукта
-    private static void addingProduct() {
+    private static void addingProduct() throws IOException {
         System.out.println("*********************************");
 
         System.out.println("Введите ID продукта");
@@ -56,14 +57,14 @@ public class Application {
     }
 
     // удаление товара
-    private static void removingAnItem() {
+    private static void removingAnItem() throws IOException {
         System.out.println("*********************************");
         System.out.println("Введите ID удаляемого продукта");
         shop.deleteProduct(consoleIntReader(Integer.MAX_VALUE));
     }
 
     // редактирование товара
-    private static void editingAnItem() {
+    private static void editingAnItem() throws IOException {
         System.out.println("*********************************");
 
         System.out.println("Введите ID продукта");
@@ -83,7 +84,9 @@ public class Application {
         alive = false;
     }
 
-    private static void run() {
+    // метод запускающий магазин
+    private static void run() throws IOException {
+
         while (alive) {
             System.out.println("*********************************");
             System.out.println("Выберите действие:\n" +
@@ -112,8 +115,10 @@ public class Application {
                     break;
             }
         }
+
     }
 
+    // метод выводящий список в прямом или обратном порядке
     private static void printList(List<Product> list, boolean revers) {
         System.out.println("*********************************");
         if (!revers) {
@@ -132,36 +137,34 @@ public class Application {
         }
     }
 
-    private static int consoleIntReader(int maxNumber) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+    //метод гарантированно принимающий с консоли цифры от 1 до maxNumber
+    private static int consoleIntReader(int maxNumber) throws IOException {
 
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             int number = 0;
             boolean happenend = false;
-            while (true) {
+            while (!happenend) {
                 try {
                     String str = reader.readLine();
                     number = Integer.parseInt(str);
                     happenend = true;
+                }catch (Exception e) {}
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 if (happenend & (number > 0) & (number <= maxNumber)) {
+              //      reader.close();
                     return number;
                 } else {
                     System.out.println("Введите ещё раз");
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       // reader.close(); // если раскоментить , выскакивает ошибка с потоком.
         return 0;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         run();
     }
 }
