@@ -115,7 +115,7 @@ public class Application {
                     break;
             }
         }
-
+        System.in.close();
     }
 
     // метод выводящий список в прямом или обратном порядке
@@ -164,7 +164,9 @@ public class Application {
     }
 
 
+
     public static void main(String[] args) throws IOException {
         run();
+
     }
 }
